@@ -14,6 +14,14 @@ class BaseModel:
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
         else:
+            fmt = '%Y-%m-%dT%H:%M:%S.%f'
+            if 'id' in kwargs:
+                self.id = kwargs['id']
+            if 'created_at' in kwargs:
+                self.created_at = datetime.strptime(kwargs['created_at'], fmt)
+            if 'updated_at' in kwargs:
+                self.updated_at = datetime.strptime(kwargs['updated_at'], fmt)
+
 
 
     def __str__(self):
