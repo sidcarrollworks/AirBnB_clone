@@ -29,16 +29,15 @@ class FileStorage:
         for key, val in FileStorage.__objects.items():
             my_dict[key] = val.to_dict()
         with open(FileStorage.__file_path, 'w') as f:
-            json.dumps(my_dict, f)
+            json.dump(my_dict, f)
 
     def reload(self):
         '''deserializes JSON files'''
         try:
             with open(FileStorage.__file_path, 'r') as f:
                 tmp_dict = json.load(f)
-            for key, val in tmp_dict.items():
-                class_name = val['__class__']
-                FileStorage.__object[key] = eval(class_name(**val))
-
-        except FileNotFound:
+                for key, val in tmp_dict.items():
+                    class_name = val['__class__']
+                    FileStorage.__objects[key] = eval(class_name)(**val)
+        except FileNotFoundError:
             pass

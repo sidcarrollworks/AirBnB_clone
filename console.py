@@ -11,17 +11,12 @@ class HBNBCommand(cmd.Cmd):
     prompt = '(hbnb) '
 
     def do_EOF(self, line):
-        '''return end of file signal'''
+        '''quits console'''
         return True
 
     def do_quit(self, line):
-        '''quits comsole'''
-        return  True
-
-    def do_create(self, *args):
-        '''Usage: create [classname]'''
-        if not args[0]:
-           print('"" class name missing""')
+        '''quits console'''
+        return  True:x
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
