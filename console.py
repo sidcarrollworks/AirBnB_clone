@@ -18,7 +18,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_quit(self, line):
         '''quits console'''
-        return  True
+        return True
 
     def do_create(self, *args):
         '''Usage: create [class]'''
@@ -27,7 +27,6 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             inst = eval(args[0])()
-            models.storage.save()
             print(inst.id)
         except NameError:
             print("** class doesn't exist **")
@@ -41,6 +40,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             sep_args = args[0].split()
             class_name = sep_args[0]
+            test = eval(class_name)
             class_id = sep_args[1]
         except NameError:
             print("** class doesn't exist **")
@@ -95,7 +95,7 @@ class HBNBCommand(cmd.Cmd):
                     new_list.append(str(val))
         else:
             try:
-                class_name = eval(args[0])
+                test = eval(args[0])
             except NameError:
                 print ("** class doesn't exist **")
                 return
@@ -135,6 +135,7 @@ class HBNBCommand(cmd.Cmd):
                         attr_v = sep_args[3]
                         setattr(obj, attr_n, attr_v[1:-1])
                         models.storage.save()
+                        print('this has been saved')
                         return
                     except IndexError:
                         print('** value missing **')
@@ -142,7 +143,7 @@ class HBNBCommand(cmd.Cmd):
                 except IndexError:
                     print('** attribute name missing **')
                     return
-        print('** no instance **')
+        print('** no instance found **')
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
