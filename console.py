@@ -20,6 +20,9 @@ class HBNBCommand(cmd.Cmd):
         '''quits console'''
         return True
 
+    def emptyline(self):
+        pass
+
     def do_create(self, *args):
         '''Usage: create [class]'''
         if not args[0]:
