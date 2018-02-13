@@ -28,6 +28,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             inst = eval(args[0])()
             print(inst.id)
+            models.storage.save()
         except NameError:
             print("** class doesn't exist **")
             return
@@ -80,35 +81,21 @@ class HBNBCommand(cmd.Cmd):
         print('** no instance found **')
 
     def do_all(self, *args):
-        '''prints all instances'''
-        stored = models.storage.all()
-        new_list = ['[']
-        flag = 1
-
+        temp_dict = models.storage.all()
+        obj_list = []
         if not args[0]:
-            for val in stored.values():
-                if flag:
-                    new_list.append(str(val))
-                    flag = 0
-                else:
-                    new_list.append(', ')
-                    new_list.append(str(val))
+            for key, val in temp_dict.items():
+                obj_list.append(val)
+            print(obj_list)
         else:
             try:
                 test = eval(args[0])
+                for key, val in temp_dict.items():
+                    if sep_arg[0] in key:
+                        obj_list.append(val)
+                print(obj_list)
             except NameError:
-                print ("** class doesn't exist **")
-                return
-            for val in stored.values():
-                if val.__class__.__name__ == args[0]:
-                    if flag:
-                        new_list.append(str(val))
-                        flag = 0
-                    else:
-                        new_list.append(', ')
-                        new_list.append(str(val))
-        new_list.append(']')
-        print("".join(new_list))
+                print("** class doesn't exist **")
 
     def do_update(self, *args):
         '''update <class name> <id> <attribute name> "<attribute value>"'''
@@ -125,7 +112,6 @@ class HBNBCommand(cmd.Cmd):
             return
         except IndexError:
             print('** instance id missing **')
-            return
         stored = models.storage.all()
         for obj in stored.values():
             if class_id == obj.id:

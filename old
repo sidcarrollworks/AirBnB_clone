@@ -1,0 +1,31 @@
+        '''prints all instances'''
+        stored = models.storage.all()
+        new_list = ['[']
+        flag = 1
+
+        if not args[0]:
+            for val in stored.values():
+                if flag:
+                    new_list.append(str(val))
+                    flag = 0
+                else:
+                    new_list.append(', ')
+                    new_list.append(str(val))
+        else:
+            try:
+                test = eval(args[0])
+            except NameError:
+                print ("** class doesn't exist **")
+                return
+            for val in stored.values():
+                if val.__class__.__name__ == args[0]:
+                    if flag:
+                        new_list.append(str(val))
+                        flag = 0
+                    else:
+                        new_list.append(', ')
+                        new_list.append(str(val))
+        new_list.append(']')
+        print("".join(new_list))
+
+
