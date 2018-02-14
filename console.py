@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
                     try:
                         attr_v = sep_args[3]
                         setattr(obj, attr_n, attr_v[1:-1])
-                        models.storage.save()
+                        obj.save()
                         print('this has been saved')
                         return
                     except IndexError:
