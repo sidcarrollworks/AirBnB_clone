@@ -130,7 +130,6 @@ class HBNBCommand(cmd.Cmd):
                         attr_v = sep_args[3]
                         setattr(obj, attr_n, attr_v[1:-1])
                         obj.save()
-                        print('this has been saved')
                         return
                     except IndexError:
                         print('** value missing **')
