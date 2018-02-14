@@ -27,6 +27,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
+        '''covers case when line is left empty'''
         pass
 
     def do_create(self, *args):
@@ -90,6 +91,7 @@ class HBNBCommand(cmd.Cmd):
         print('** no instance found **')
 
     def do_all(self, *args):
+        '''shows all the saved json'''
         temp_dict = models.storage.all()
         obj_list = []
         if not args[0]:
