@@ -2,7 +2,7 @@
 """
 amenity class inherits from base class
 """
-from models.base_mode import BaseModel
+from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
