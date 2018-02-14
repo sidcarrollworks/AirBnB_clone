@@ -13,6 +13,7 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+
 class HBNBCommand(cmd.Cmd):
     """comand processor"""
     prompt = '(hbnb) '
@@ -44,8 +45,8 @@ class HBNBCommand(cmd.Cmd):
     def do_show(self, *args):
         '''Usage: show [class] [id]'''
         if not args[0]:
-           print('** class name missing **')
-           return
+            print('** class name missing **')
+            return
         try:
             sep_args = args[0].split()
             class_name = sep_args[0]
@@ -67,8 +68,8 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, *args):
         '''Usage: destroy [class] [id]'''
         if not args[0]:
-           print('** class name missing **')
-           return
+            print('** class name missing **')
+            return
         try:
             sep_args = args[0].split()
             class_name = sep_args[0]
