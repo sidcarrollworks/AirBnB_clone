@@ -3,11 +3,17 @@ This project is part of a multi-part project over recreating the airbnb web appl
 
 ## Usage:
 In order to use this you will have to clone the this repository:
-` git clone https://github.com/squidcarroll/AirBnB_clone.git`
+
+`$ git clone https://github.com/squidcarroll/AirBnB_clone.git`
+
 Then To use the console just type:
-` ./console `
+
+`$ ./console`
+
 To find all the commands you can use type:
-` help `
-Once you do that you can use:
-` help [name of command] `
-For more specific details about the command.
+
+`(hbnh) help`
+
+If you want to know how to use the command type:
+
+`(hbnb) help [name of command]`
