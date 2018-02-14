@@ -2,7 +2,7 @@
 """
 place class inherits from base class
 """
-from models.base_mode import BaseModel
+from models.base_model import BaseModel
 
 
 class Place(BaseModel):
