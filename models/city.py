@@ -2,10 +2,10 @@
 """
 sity class inherits from base class
 """
-from models.base_mode import BaseModel
+from models.base_model import BaseModel
 
 
-class State(BaseModel):
+class City(BaseModel):
     """ city class inherits from base class """
     state_id = ""
     name = ""
