@@ -91,7 +91,7 @@ class HBNBCommand(cmd.Cmd):
         print('** no instance found **')
 
     def do_all(self, *args):
-        '''shows all the saved json'''
+        '''Usage: all [class]'''
         temp_dict = models.storage.all()
         obj_list = []
         if not args[0]:
