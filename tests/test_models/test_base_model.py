@@ -7,7 +7,6 @@ Contains class TestBaseModelDocs and class TestBaseModel
 from datetime import datetime
 import inspect
 from models import base_model
-import pep8
 import unittest
 import string
 from io import StringIO

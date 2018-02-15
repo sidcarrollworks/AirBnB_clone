@@ -4,10 +4,8 @@
 '''
 import unittest
 import json
-import sys
-import io
-import os
 import uuid
+import os
 import datetime
 from models.engine.file_storage import FileStorage
 from models.base_model import BaseModel
@@ -23,7 +21,7 @@ class TestFileStorage(unittest.TestCase):
     def test_all(self):
         '''test all'''
         inst = FileStorage()
-        alll = FileStorage.all()
+        alll = inst.all()
         self.assertIsInstance(alll, dict)
 
     def test_save(self):
@@ -40,6 +38,6 @@ class TestFileStorage(unittest.TestCase):
         inst = FileStorage()
         base = BaseModel()
         inst.new(base)
-        alll = inst.all()
-        test = inst.__class__.__name__ + '.' + base.id
-        self.assertIn(alll, test)
+        test_str = "{}.{}".format(base.__class__.__name__, base.id)
+        test_dict = inst.all()
+        self.assertIn(test_str, test_dict)

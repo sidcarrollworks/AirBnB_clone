@@ -8,7 +8,6 @@ from datetime import datetime
 import inspect
 from models import base_model
 from models.place import Place
-import pep8
 import unittest
 import string
 from io import StringIO
