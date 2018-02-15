@@ -24,14 +24,29 @@ class TestFileStorage(unittest.TestCase):
         alll = inst.all()
         self.assertIsInstance(alll, dict)
 
+    def test_filestorage(self):
+        '''test filestorage'''
+        inst = FileStorage()
+        self.assertEqual(type(inst), type(FileStorage()))
+
+    def test_reload(self):
+        '''test reload'''
+        store = FileStorage()
+        inst = BaseModel()
+        inst_id = inst.id
+        store.new(inst)
+        store.save()
+        store.reload()
+        inst_dict = store.all()
+        self.assertEqual(type(inst_dict), dict)
+
     def test_save(self):
         '''test save'''
+        base = BaseModel()
         inst = FileStorage()
+        inst.new(base)
         inst.save()
-        try:
-            os.path.exists('file.json')
-        except FileNotFoundError as error:
-            print(error)
+        self.assertTrue(os.path.exists('file.json'))
 
     def test_new(self):
         ''' test new'''
