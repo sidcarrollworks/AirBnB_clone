@@ -56,3 +56,10 @@ class TestFileStorage(unittest.TestCase):
         test_str = "{}.{}".format(base.__class__.__name__, base.id)
         test_dict = inst.all()
         self.assertIn(test_str, test_dict)
+
+    def test_new(self):
+        """Tests if new method adds obj to __objects."""
+        a = FileStorage()
+        b = BaseModel()
+        a.new(b)
+        self.assertTrue('BaseModel.' + b.id in a.all())
