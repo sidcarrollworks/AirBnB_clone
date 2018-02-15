@@ -70,13 +70,9 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print('** no instance found **')
 
-<<<<<<< HEAD
     def do_all(self, args):
-        args = shlex.split(args)
-=======
-    def do_all(self, *args):
         '''Usage: all [class]'''
->>>>>>> 9e3df22237a437e82f15f10d81dab29d41aeebce
+        args = shlex.split(args)
         temp_dict = models.storage.all()
         obj_list = []
         if len(args) == 0:
