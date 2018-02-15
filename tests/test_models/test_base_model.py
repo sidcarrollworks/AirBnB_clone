@@ -46,3 +46,49 @@ class TestBaseModelDocs(unittest.TestCase):
         '''Test created_at created'''
         model_5 = BaseModel()
         self.assertEqual(type(model_5.created_at), datetime)
+
+    def test_updated_at(self):
+        '''Test updated_at'''
+        model_6 = BaseModel()
+        self.assertEqual(datetime, type(model_6.updated_at))
+
+    def test_created_and_updated_at_init(self):
+        '''created_at and updated_at should be equal at init'''
+        model_7 = BaseModel()
+        self.assertEqual(model_7.created_at, model_7.updated_at)
+
+    def test_to_dict_type(self):
+        """test to_dict returns dictionary"""
+        model_8 = BaseModel()
+        self.assertEqual(dict, type(model_8.to_dict()))
+
+    def test_to_dict_class(self):
+        '''test class in dict'''
+        model_9 = BaseModel()
+        self.assertEqual("BaseModel", (model_9.to_dict())["__class__"])
+
+    def test_diff(self):
+        '''Test 2 instances are diff ids'''
+        model_10 = BaseModel()
+        model_11 = BaseModel()
+        self.assertNotEqual(model_10.id, model_11.id)
+
+    def test_diff_times(self):
+        '''test 2 instance have different times'''
+        model_12 = BaseModel()
+        model_13 = BaseModel()
+        self.assertNotEqual(model_12.updated_at, model_13.updated_at)
+
+    def test_created_at_stays_same(self):
+        '''test that created at time stays same'''
+        model_14 = BaseModel()
+        first_created_time = model_14.created_at
+        model_14.save()
+        self.assertEqual(first_created_time, model_14.created_at)
+
+    def test_updated_at_not_equal(self):
+        '''test that the updated time changes'''
+        model_15 = BaseModel()
+        first_update = model_15.updated_at
+        model_15.save()
+        self.assertNotEqual(first_update, model_15.updated_at)
