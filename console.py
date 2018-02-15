@@ -21,6 +21,7 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def emptyline(self):
+        '''covers case when line is left empty'''
         pass
 
     def do_create(self, args):
@@ -69,8 +70,13 @@ class HBNBCommand(cmd.Cmd):
             else:
                 print('** no instance found **')
 
+<<<<<<< HEAD
     def do_all(self, args):
         args = shlex.split(args)
+=======
+    def do_all(self, *args):
+        '''Usage: all [class]'''
+>>>>>>> 9e3df22237a437e82f15f10d81dab29d41aeebce
         temp_dict = models.storage.all()
         obj_list = []
         if len(args) == 0:
