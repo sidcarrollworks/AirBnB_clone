@@ -64,5 +64,5 @@ class TestPlaceClass(unittest.TestCase):
         self.assertIsNot(created1, created2)
         self.assertTrue(type(created1) is datetime)
 
-if __name__ =='__main__':
+if __name__ == '__main__':
     unittest.main()

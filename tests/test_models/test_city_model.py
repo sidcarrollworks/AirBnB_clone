@@ -85,4 +85,4 @@ class TestCityClass(unittest.TestCase):
         self.assertTrue(test1.id != test2.id)
 
 if __name__ == '__main__':
-    unittest.main() 
+    unittest.main()
