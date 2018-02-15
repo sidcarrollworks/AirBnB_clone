@@ -22,16 +22,16 @@ class TestAmenityClass(unittest.TestCase):
     def test_props(self):
         '''Test the properties of amenity'''
         my_am = Amenity()
-        self.assertIsInstance(amenity, BaseModel)
-        self.assertTrue(hasattr(amenity, "updated_at"))
-        self.assertTrue(hasattr(amenity, "created_at"))
-        self.assertTrue(hasattr(amenity, "id"))
+        self.assertIsInstance(my_am, BaseModel)
+        self.assertTrue(hasattr(my_am, "updated_at"))
+        self.assertTrue(hasattr(my_am, "created_at"))
+        self.assertTrue(hasattr(my_am, "id"))
 
     def test_str(self):
         ''' test correct output'''
         my_am = Amenity()
         my_str = "[Amenity] ({}) {}".format(my_am.id, my_am.__dict__)
-        self.assertEqual(string, str(amenity))
+        self.assertEqual(my_str, str(my_am))
 
     def test_values(self):
         ''' test correct values'''
