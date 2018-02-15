@@ -22,4 +22,4 @@ class TestStateClass(unittest.TestCase):
     def test_type(self):
         '''Test the properties of user'''
         my_state = State()
-        self.assertTrue(type(my_model.name) is str)
+        self.assertTrue(type(my_state.name) is str)
