@@ -22,7 +22,7 @@ class TestPlaceClass(unittest.TestCase):
     def test_isntance(self):
         '''Test the properties of user'''
         my_user = User()
-        self.assertIsInstance(my_user(), BaseModel)
+        self.assertIsInstance(my_user, BaseModel)
 
     def test_attributes(self):
         '''tests user attributes'''
@@ -42,7 +42,7 @@ class TestPlaceClass(unittest.TestCase):
     def test_save(self):
         ''' test save mdethod'''
         usr = User()
-        test_updated = usr.updated
+        test_updated = usr.updated_at
         usr.save()
         update = usr.updated_at
         self.assertTrue(test_updated, update)
@@ -64,5 +64,5 @@ class TestPlaceClass(unittest.TestCase):
         self.assertIsNot(created1, created2)
         self.assertTrue(type(created1) is datetime)
 
-if __name == __'main':
+if __name__ =='__main__':
     unittest.main()
