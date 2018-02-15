@@ -92,3 +92,22 @@ class TestBaseModelDocs(unittest.TestCase):
         first_update = model_15.updated_at
         model_15.save()
         self.assertNotEqual(first_update, model_15.updated_at)
+
+    def test_save(self):
+        '''test save function'''
+        model_15 = BaseModel()
+        model_15.save()
+        real = type(model_15.updated_at)
+        expect = type(datetime.now())
+        self.assertEqual(expect, real)
+
+    def test_to_string(self):
+        '''test string function'''
+        model_16 = BaseModel()
+        my_str = str(model_16)
+        my_list = ['id', 'created_at', 'updated_at', 'BaseModel']
+        test = 0
+        for i in my_list:
+            if i in my_str:
+                test += 1
+        self.assertTrue(test == 4)
