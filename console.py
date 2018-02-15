@@ -99,7 +99,7 @@ class HBNBCommand(cmd.Cmd):
         else:
             key = "{}.{}".format(args[0], args[1])
             stored = models.storage.all()
-            if key not in temp_dict:
+            if key not in stored:
                 print('** no instance found **')
             elif len(args) == 2:
                 print('** attribute name missing **')
