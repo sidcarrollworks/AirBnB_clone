@@ -21,4 +21,6 @@ class TestReviewClass(unittest.TestCase):
 
     def test_props(self):
         my_rev = Review()
-        self.assertTrue("user_id" in my_rev.__dir__())
+        self.assertTrue(type(my_rev.place_id) is str)
+        self.assertTrue(type(my_rev.user_id) is str)
+        self.assertTrue(type(my_rev.text) is str)

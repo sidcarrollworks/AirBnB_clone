@@ -19,7 +19,7 @@ BaseModel = base_model.BaseModel
 class TestStateClass(unittest.TestCase):
     '''Tests for User'''
 
-    def test_props(self):
+    def test_type(self):
         '''Test the properties of user'''
         my_state = State()
-        self.assertTrue("name" in my_state.__dir__())
+        self.assertTrue(type(my_model.name) is str)

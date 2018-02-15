@@ -22,4 +22,14 @@ class TestPlaceClass(unittest.TestCase):
     def test_props(self):
         '''Test the properties of place'''
         my_place = Place()
-        self.assertTrue("name" in my_place.__dir__())
+        self.assertTrue(type(my_place.city_id) is str)
+        self.assertTrue(type(my_place.user_id) is str)
+        self.assertTrue(type(my_place.name) is str)
+        self.assertTrue(type(my_place.description) is str)
+        self.assertTrue(type(my_place.number_rooms) is int)
+        self.assertTrue(type(my_place.number_bathrooms) is int)
+        self.assertTrue(type(my_place.max_guest) is int)
+        self.assertTrue(type(my_place.price_by_night) is int)
+        self.assertTrue(type(my_place.latitude) is float)
+        self.assertTrue(type(my_place.longitude) is float)
+        self.assertTrue(type(my_place.amenity_ids) is list)

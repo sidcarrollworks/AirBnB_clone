@@ -2,22 +2,17 @@
 """
 Contains tests for class amenity
 """
-
-
-from datetime import datetime
-import inspect
-from models.base_model import BaseModel
-from models import amenity
+from models.amenity import Amenity
 import unittest
-import string
-from io import StringIO
-import sys
-
-Amenity = amenity.Amenity
 
 
 class TestAmenityClass(unittest.TestCase):
     '''Tests for Amenity'''
+
+    def test_type(self):
+        '''test attr type'''
+        my_am = Amenity()
+        self.assertTrue(type(my_am.name) is str)
 
     def test_props(self):
         '''Test the properties of amenity'''
