@@ -41,4 +41,4 @@ class TestFileStorage(unittest.TestCase):
         inst.new(base)
         alll = inst.all()
         test = inst.__class__.__name__ + '.' + base.id
-        self.assertIn(test_entry, test_dict)
+        self.assertIn(alll, test)
