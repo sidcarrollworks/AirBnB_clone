@@ -6,14 +6,14 @@ Contains tests for class amenity
 
 from datetime import datetime
 import inspect
-from models import base_model
-from models.amenity import Amenity
+from models.base_model import BaseModel
+from models import amenity
 import unittest
 import string
 from io import StringIO
 import sys
 
-BaseModel = base_model.BaseModel
+Amenity = amenity.Amenity
 
 
 class TestAmenityClass(unittest.TestCase):
@@ -22,4 +22,24 @@ class TestAmenityClass(unittest.TestCase):
     def test_props(self):
         '''Test the properties of amenity'''
         my_am = Amenity()
-        self.assertTrue("name" in my_am.__dir__())
+        self.assertIsInstance(amenity, BaseModel)
+        self.assertTrue(hasattr(amenity, "updated_at"))
+        self.assertTrue(hasattr(amenity, "created_at"))
+        self.assertTrue(hasattr(amenity, "id"))
+
+    def test_str(self):
+        ''' test correct output'''
+        my_am = Amenity()
+        my_str = "[Amenity] ({}) {}".format(my_am.id, my_am.__dict__)
+        self.assertEqual(string, str(amenity))
+
+    def test_values(self):
+        ''' test correct values'''
+        my_am = Amenity()
+        fmt = "%Y-%m-%dT%H:%M:%S.%f"
+        my_dict = my_am.to_dict()
+        self.assertEqual(my_dict['__class__'], 'Amenity')
+        self.assertEqual(type(my_dict['created_at']), str)
+        self.assertEqual(type(my_dict['updated_at']), str)
+        self.assertEqual(my_dict['created_at'], my_am.created_at.strftime(fmt))
+        self.assertEqual(my_dict['updated_at'], my_am.updated_at.strftime(fmt))

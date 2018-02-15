@@ -4,8 +4,7 @@
 '''
 
 import json
-from models.base_model import BaseModel
-from models.user import User
+import models
 
 
 class FileStorage:
@@ -38,7 +37,8 @@ class FileStorage:
             with open(self.__file_path, 'r') as f:
                 tmp_dict = json.load(f)
             for key, val in tmp_dict.items():
-                class_name = val['__class__']
-                self.__objects[key] = eval(class_name)(**val)
+                class_name = val.get('__class__')
+                if class_name in models.class_dict:
+                    self.__objects[key] = models.class_dict[class_name](**val)
         except FileNotFoundError:
             pass

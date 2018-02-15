@@ -4,14 +4,8 @@
 '''
 
 import cmd
-from models.base_model import BaseModel
 import models
-from models.user import User
-from models.state import State
-from models.city import City
-from models.amenity import Amenity
-from models.place import Place
-from models.review import Review
+import shlex
 
 
 class HBNBCommand(cmd.Cmd):
@@ -29,115 +23,90 @@ class HBNBCommand(cmd.Cmd):
     def emptyline(self):
         pass
 
-    def do_create(self, *args):
+    def do_create(self, args):
         '''Usage: create [class]'''
-        if not args[0]:
+        if not args:
             print('** class name missing **')
-            return
-        try:
-            inst = eval(args[0])()
+        elif args not in models.class_dict:
+            print("** class doesn't exist **")
+        else:
+            inst = models.class_dict[args]()
             print(inst.id)
             models.storage.save()
-        except NameError:
-            print("** class doesn't exist **")
-            return
 
-    def do_show(self, *args):
+    def do_show(self, args):
         '''Usage: show [class] [id]'''
-        if not args[0]:
+        args = shlex.split(args)
+        if len(args) == 0:
             print('** class name missing **')
-            return
-        try:
-            sep_args = args[0].split()
-            class_name = sep_args[0]
-            test = eval(class_name)
-            class_id = sep_args[1]
-        except NameError:
-            print("** class doesn't exist **")
-            return
-        except IndexError:
+        elif len(args) == 1:
             print('** instance id missing **')
-            return
-        stored = models.storage.all()
-        for i in stored.values():
-            if class_name == i.__class__.__name__ and class_id == i.id:
-                print(i)
-                return
-        print('** no instance found **')
-
-    def do_destroy(self, *args):
-        '''Usage: destroy [class] [id]'''
-        if not args[0]:
-            print('** class name missing **')
-            return
-        try:
-            sep_args = args[0].split()
-            class_name = sep_args[0]
-            test = eval(class_name)
-            class_id = sep_args[1]
-        except NameError:
+        elif args[0] not in models.class_dict:
             print("** class doesn't exist **")
-            return
-        except IndexError:
-            print ('** instance id missing **')
-            return
-        stored = models.storage.all()
-        for key, val in stored.items():
-            if class_name == val.__class__.__name__ and class_id == val.id:
+        else:
+            key = "{}.{}".format(args[0], args[1])
+            stored = models.storage.all()
+            if key in stored:
+                print(stored[key])
+            else:
+                print('** no instance found **')
+
+    def do_destroy(self, args):
+        '''Usage: destroy [class] [id]'''
+        args = shlex.split(args)
+        if len(args) == 0:
+            print('** class name missing **')
+        elif len(args) == 1:
+            print('** instance id missing **')
+        elif args[0] not in models.class_dict:
+            print("** class doesn't exist **")
+        else:
+            key = "{}.{}".format(args[0], args[1])
+            stored = models.storage.all()
+            if key in stored:
                 del stored[key]
                 models.storage.save()
-                return
-        print('** no instance found **')
+            else:
+                print('** no instance found **')
 
-    def do_all(self, *args):
+    def do_all(self, args):
+        args = shlex.split(args)
         temp_dict = models.storage.all()
         obj_list = []
-        if not args[0]:
+        if len(args) == 0:
             for key, val in temp_dict.items():
                 obj_list.append(val)
             print(obj_list)
-        else:
-            try:
-                test = eval(args[0])
-                for key, val in temp_dict.items():
-                    if sep_arg[0] in key:
-                        obj_list.append(val)
-                print(obj_list)
-            except NameError:
-                print("** class doesn't exist **")
-
-    def do_update(self, *args):
-        '''update <class name> <id> <attribute name> "<attribute value>"'''
-        if not (args[0]):
-            print('** class name missing **')
-            return
-        try:
-            sep_args = args[0].split()
-            class_name = sep_args[0]
-            test = eval(class_name)
-            class_id = sep_args[1]
-        except NameError:
+        elif args[0] not in models.class_dict:
             print("** class doesn't exist **")
-            return
-        except IndexError:
+        else:
+            for key, val in temp_dict.items():
+                if args[0] in key:
+                    obj_list.append(val)
+            print(obj_list)
+
+    def do_update(self, args):
+        '''update <class name> <id> <attribute name> "<attribute value>"'''
+        args = shlex.split(args)
+        if len(args) == 0:
+            print('** class name missing **')
+        elif len(args) == 1:
             print('** instance id missing **')
-        stored = models.storage.all()
-        for obj in stored.values():
-            if class_id == obj.id:
-                try:
-                    attr_n = sep_args[2]
-                    try:
-                        attr_v = sep_args[3]
-                        setattr(obj, attr_n, attr_v[1:-1])
-                        obj.save()
-                        return
-                    except IndexError:
-                        print('** value missing **')
-                        return
-                except IndexError:
-                    print('** attribute name missing **')
-                    return
-        print('** no instance found **')
+        elif args[0] not in models.class_dict:
+            print("** class doesn't exist **")
+        else:
+            key = "{}.{}".format(args[0], args[1])
+            stored = models.storage.all()
+            if key not in temp_dict:
+                print('** no instance found **')
+            elif len(args) == 2:
+                print('** attribute name missing **')
+            elif len(args) == 3:
+                print('** value missing **')
+            else:
+                val = stored.get(key)
+                setattr(val, args[2], args[3])
+                models.storage.save()
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
