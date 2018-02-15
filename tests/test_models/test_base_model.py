@@ -41,3 +41,8 @@ class TestBaseModelDocs(unittest.TestCase):
         self.assertIs(model_4.id[13], "-")
         self.assertIs(model_4.id[18], "-")
         self.assertIs(model_4.id[23], "-")
+
+    def test_created_at(self):
+        '''Test created_at created'''
+        model_5 = BaseModel()
+        self.assertEqual(type(model_5.created_at), datetime)
