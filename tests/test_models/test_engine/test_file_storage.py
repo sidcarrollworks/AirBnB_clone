@@ -57,9 +57,26 @@ class TestFileStorage(unittest.TestCase):
         test_dict = inst.all()
         self.assertIn(test_str, test_dict)
 
-    def test_new(self):
+    def test_new_2(self):
         """Tests if new method adds obj to __objects."""
         a = FileStorage()
         b = BaseModel()
         a.new(b)
         self.assertTrue('BaseModel.' + b.id in a.all())
+
+    def test_save(self):
+        ''' test if it save attributes'''
+        inst = BaseModel()
+        store = FileStorage()
+        inst.my_number = 9
+        store.new(inst)
+        store.save()
+        self.assertEqual(inst.my_number, 9)
+
+    def test_file(self):
+        '''test if file exists'''
+        inst = BaseModel()
+        store = FileStorage()
+        store.new(inst)
+        store.save()
+        self.assertTrue(os.path.exists(store._FileStorage__file_path))
